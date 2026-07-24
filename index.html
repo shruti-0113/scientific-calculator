@@ -3,48 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
-
-    <!-- CSS Link -->
+    <title>Scientific Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="calculator">
+    <div class="app">
 
-        <input type="text" id="display" disabled>
+        <!-- History Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>History</h2>
+                <button class="clear-history-btn" onclick="clearHistory()" title="Clear all history">Clear</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <p class="empty-msg">No calculations yet</p>
+            </div>
+        </div>
 
-        <div class="buttons">
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Toggle history">&#9776;</button>
 
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="deleteLast()">DEL</button>
-            <button onclick="appendValue('%')">%</button>
-            <button onclick="appendValue('/')">/</button>
+        <!-- Calculator -->
+        <div class="calculator" id="calculator">
 
-            <button onclick="appendValue('7')">7</button>
-            <button onclick="appendValue('8')">8</button>
-            <button onclick="appendValue('9')">9</button>
-            <button onclick="appendValue('*')">*</button>
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="btnBasic" onclick="setMode('basic')">Basic</button>
+                <button class="mode-btn" id="btnScientific" onclick="setMode('scientific')">Scientific</button>
+                <button class="mode-btn" id="btnMatrix" onclick="setMode('matrix')">Matrix</button>
+            </div>
 
-            <button onclick="appendValue('4')">4</button>
-            <button onclick="appendValue('5')">5</button>
-            <button onclick="appendValue('6')">6</button>
-            <button onclick="appendValue('-')">-</button>
+            <!-- Display -->
+            <div class="display">
+                <input type="text" id="expression" readonly placeholder="0">
+                <input type="text" id="result" readonly placeholder="0">
+            </div>
 
-            <button onclick="appendValue('1')">1</button>
-            <button onclick="appendValue('2')">2</button>
-            <button onclick="appendValue('3')">3</button>
-            <button onclick="appendValue('+')">+</button>
+            <!-- Scientific Buttons -->
+            <div class="buttons scientific-buttons hidden" id="scientificBtns">
+                <button class="fn-btn" onclick="insertFunc('sin(')">sin</button>
+                <button class="fn-btn" onclick="insertFunc('cos(')">cos</button>
+                <button class="fn-btn" onclick="insertFunc('tan(')">tan</button>
+                <button class="fn-btn" onclick="insertFunc('asin(')">sin&#x207B;&#x00B9;</button>
+                <button class="fn-btn" onclick="insertFunc('acos(')">cos&#x207B;&#x00B9;</button>
+                <button class="fn-btn" onclick="insertFunc('atan(')">tan&#x207B;&#x00B9;</button>
 
-            <button onclick="appendValue('0')">0</button>
-            <button onclick="appendValue('.')">.</button>
-            <button onclick="calculate()">=</button>
+                <button class="fn-btn" onclick="insertFunc('log(')">log</button>
+                <button class="fn-btn" onclick="insertFunc('ln(')">ln</button>
+                <button class="fn-btn" onclick="insertFunc('sqrt(')">&#8730;</button>
+                <button class="fn-btn" onclick="insertFunc('cbrt(')">&#8731;</button>
+                <button class="fn-btn" onclick="insertFunc('abs(')">|x|</button>
+                <button class="fn-btn" onclick="insertText('!')">x!</button>
+
+                <button class="fn-btn" onclick="insertText('^(')">x&#119891;</button>
+                <button class="fn-btn" onclick="insertText('^2')">x&#178;</button>
+                <button class="fn-btn" onclick="insertText('^3')">x&#179;</button>
+                <button class="fn-btn" onclick="insertConst('pi')">&pi;</button>
+                <button class="fn-btn" onclick="insertConst('e')">e</button>
+                <button class="fn-btn" onclick="insertText('(')">(</button>
+
+                <button class="fn-btn" onclick="insertText('10^(')">10&#119891;</button>
+                <button class="fn-btn" onclick="insertText('2^(')">2&#119891;</button>
+                <button class="fn-btn" onclick="insertFunc('exp(')">e&#119891;</button>
+                <button class="fn-btn" onclick="insertText('%')">%</button>
+                <button class="fn-btn" onclick="insertText(')')">)</button>
+                <button class="fn-btn" onclick="insertText(' mod ')">mod</button>
+            </div>
+
+            <!-- Matrix Panel -->
+            <div class="matrix-panel hidden" id="matrixPanel">
+                <div class="matrix-size-row">
+                    <label>Rows</label>
+                    <select id="matRows" onchange="resizeMatrix()">
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                    </select>
+                    <label>Cols</label>
+                    <select id="matCols" onchange="resizeMatrix()">
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="matrix-ops">
+                    <button class="mat-op-btn" onclick="matrixOp('add')">A + B</button>
+                    <button class="mat-op-btn" onclick="matrixOp('sub')">A − B</button>
+                    <button class="mat-op-btn" onclick="matrixOp('mul')">A × B</button>
+                    <button class="mat-op-btn" onclick="matrixOp('scalar')">k × A</button>
+                    <button class="mat-op-btn" onclick="matrixOp('transpose')">A<sup>T</sup></button>
+                    <button class="mat-op-btn" onclick="matrixOp('det')">det(A)</button>
+                    <button class="mat-op-btn" onclick="matrixOp('inv')">A<sup>-1</sup></button>
+                    <button class="mat-op-btn" onclick="matrixOp('trace')">tr(A)</button>
+                </div>
+
+                <div class="scalar-row hidden" id="scalarRow">
+                    <label>Scalar k =</label>
+                    <input type="text" id="scalarValue" value="2" class="scalar-input">
+                </div>
+
+                <div class="matrix-inputs">
+                    <div class="matrix-grid-wrap">
+                        <h4>Matrix A</h4>
+                        <div class="matrix-grid" id="matrixA"></div>
+                    </div>
+                    <div class="matrix-grid-wrap" id="matrixBWrap">
+                        <h4>Matrix B</h4>
+                        <div class="matrix-grid" id="matrixB"></div>
+                    </div>
+                </div>
+
+                <div class="matrix-result" id="matrixResult"></div>
+            </div>
+
+            <!-- Basic Buttons -->
+            <div class="buttons basic-buttons" id="basicBtns">
+                <button class="op-btn clear-btn" onclick="clearDisplay()">C</button>
+                <button class="op-btn del-btn" onclick="deleteLast()">&#9003;</button>
+                <button class="paren-btn" onclick="insertText('(')">(</button>
+                <button class="paren-btn" onclick="insertText(')')">)</button>
+
+                <button class="num-btn" onclick="insertText('7')">7</button>
+                <button class="num-btn" onclick="insertText('8')">8</button>
+                <button class="num-btn" onclick="insertText('9')">9</button>
+                <button class="op-btn div-btn" onclick="insertText('/')">&#247;</button>
+
+                <button class="num-btn" onclick="insertText('4')">4</button>
+                <button class="num-btn" onclick="insertText('5')">5</button>
+                <button class="num-btn" onclick="insertText('6')">6</button>
+                <button class="op-btn mul-btn" onclick="insertText('*')">&#215;</button>
+
+                <button class="num-btn" onclick="insertText('1')">1</button>
+                <button class="num-btn" onclick="insertText('2')">2</button>
+                <button class="num-btn" onclick="insertText('3')">3</button>
+                <button class="op-btn sub-btn" onclick="insertText('-')">&#8722;</button>
+
+                <button class="num-btn" onclick="insertText('00')">00</button>
+                <button class="num-btn" onclick="insertText('0')">0</button>
+                <button class="num-btn" onclick="insertText('.')">.</button>
+                <button class="op-btn add-btn" onclick="insertText('+')">+</button>
+
+                <button class="equal-btn span-2" onclick="calculate()">=</button>
+            </div>
 
         </div>
     </div>
 
-    <!-- JavaScript Link -->
     <script src="script.js"></script>
-
 </body>
 </html>
