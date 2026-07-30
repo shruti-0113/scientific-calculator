@@ -64,4 +64,4 @@ A modern, feature-rich calculator web application with scientific functions, mat
 Open `index.html` in your browser to use the calculator.
 
 ## License
-This project is private.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
