@@ -1,5 +1,11 @@
 # Scientific Calculator
 
+<p align="center">
+  <a href="https://scientific-calculator-black-xi.vercel.app">
+    <img src="https://img.shields.io/badge/LIVE%20DEMO-Vercel-8B5CF6?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
+  </a>
+</p>
+
 A modern, feature-rich calculator web application with scientific functions, matrix operations, and calculation history.
 
 ## Features
@@ -61,7 +67,10 @@ A modern, feature-rich calculator web application with scientific functions, mat
 - Vanilla JavaScript (no dependencies)
 
 ## Live Demo
-Open `index.html` in your browser to use the calculator.
+
+Try it now: [scientific-calculator-black-xi.vercel.app](https://scientific-calculator-black-xi.vercel.app)
+
+Click the link above or open `index.html` in your browser to use the calculator locally.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
