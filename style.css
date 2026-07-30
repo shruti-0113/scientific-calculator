@@ -96,15 +96,16 @@ body {
 }
 
 .history-item {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     background: #111118;
     border-radius: 10px;
-    padding: 14px 16px 12px;
+    padding: 10px 8px 10px 14px;
     margin-bottom: 6px;
     cursor: pointer;
     transition: all 0.2s;
     border: 1px solid #1a1a26;
-    position: relative;
 }
 
 .history-item:hover {
@@ -112,40 +113,46 @@ body {
     border-color: #3b82f644;
 }
 
+.hist-body {
+    flex: 1;
+    min-width: 0;
+}
+
 .history-item .hist-expr {
     color: #6b7280;
     font-size: 12px;
     word-break: break-all;
     line-height: 1.5;
-    padding: 0 4px;
 }
 
 .history-item .hist-result {
     color: #e0e0e0;
     font-size: 20px;
     font-weight: 700;
-    margin-top: 3px;
+    margin-top: 2px;
     letter-spacing: 0.5px;
 }
 
-.history-item .hist-delete {
-    position: absolute;
-    top: 6px;
-    right: 8px;
+.history-item .hist-menu {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
     background: none;
     border: none;
     color: #3a3a4e;
     cursor: pointer;
-    font-size: 12px;
-    padding: 2px 5px;
-    border-radius: 4px;
+    font-size: 18px;
+    border-radius: 6px;
     transition: all 0.2s;
     opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.history-item:hover .hist-delete { opacity: 1; }
+.history-item:hover .hist-menu { opacity: 1; }
 
-.history-item .hist-delete:hover { color: #ff5c5c; background: #ff5c5c11; }
+.history-item .hist-menu:hover { color: #ff5c5c; background: #ff5c5c11; }
 
 /* ── Sidebar Toggle ── */
 .sidebar-toggle {

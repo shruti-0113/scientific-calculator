@@ -25,9 +25,11 @@ function renderHistory() {
         const div = document.createElement('div');
         div.className = 'history-item';
         div.innerHTML = `
-            <button class="hist-delete" onclick="deleteHistoryItem(${index}, event)" title="Delete">&#10005;</button>
-            <div class="hist-expr">${escapeHtml(item.expression)}</div>
-            <div class="hist-result">= ${escapeHtml(item.result)}</div>`;
+            <div class="hist-body">
+                <div class="hist-expr">${escapeHtml(item.expression)}</div>
+                <div class="hist-result">= ${escapeHtml(item.result)}</div>
+            </div>
+            <button class="hist-menu" onclick="deleteHistoryItem(${index}, event)" title="Delete">&#8942;</button>`;
         div.addEventListener('click', (e) => {
             if (e.target.classList.contains('hist-delete')) return;
             currentExpression = item.result;
