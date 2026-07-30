@@ -24,11 +24,11 @@ body {
 .sidebar {
     width: 300px;
     max-height: 820px;
-    background: #111118;
+    background: #0d0d14;
     border-radius: 16px 0 0 16px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #2a2a3e;
+    border: 1px solid #1e1e2e;
     border-right: none;
     transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.3s ease;
     overflow: hidden;
@@ -44,90 +44,108 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px 12px;
-    border-bottom: 1px solid #2a2a3e;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #1e1e2e;
 }
 
 .sidebar-header h2 {
     color: #e0e0e0;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 .clear-history-btn {
     background: transparent;
-    color: #ff5c5c;
-    border: 1px solid #ff5c5c44;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 13px;
+    color: #6b7280;
+    border: 1px solid #2a2a3e;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .clear-history-btn:hover {
-    background: #ff5c5c22;
-    border-color: #ff5c5c;
+    background: #ff5c5c11;
+    border-color: #ff5c5c55;
+    color: #ff5c5c;
 }
 
 .history-list {
     flex: 1;
     overflow-y: auto;
-    padding: 10px;
+    padding: 10px 12px;
 }
 
-.history-list::-webkit-scrollbar { width: 5px; }
+.history-list::-webkit-scrollbar { width: 4px; }
 .history-list::-webkit-scrollbar-track { background: transparent; }
-.history-list::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+.history-list::-webkit-scrollbar-thumb { background: #2a2a3e; border-radius: 4px; }
 
 .empty-msg {
-    color: #555;
+    color: #3a3a4e;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 50px;
     font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0.5px;
 }
 
 .history-item {
-    background: #16161e;
+    text-align: center;
+    background: #111118;
     border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
+    padding: 14px 16px 12px;
+    margin-bottom: 6px;
     cursor: pointer;
     transition: all 0.2s;
-    border: 1px solid transparent;
+    border: 1px solid #1a1a26;
+    position: relative;
 }
 
 .history-item:hover {
-    background: #1c1c28;
-    border-color: #3b82f6;
+    background: #161622;
+    border-color: #3b82f644;
 }
 
 .history-item .hist-expr {
-    color: #8888aa;
-    font-size: 13px;
+    color: #6b7280;
+    font-size: 12px;
     word-break: break-all;
+    line-height: 1.5;
+    padding: 0 4px;
 }
 
 .history-item .hist-result {
     color: #e0e0e0;
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 4px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
 }
 
 .history-item .hist-delete {
-    float: right;
+    position: absolute;
+    top: 6px;
+    right: 8px;
     background: none;
     border: none;
-    color: #666;
+    color: #3a3a4e;
     cursor: pointer;
-    font-size: 15px;
-    padding: 0 4px;
-    transition: color 0.2s;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    opacity: 0;
 }
 
-.history-item .hist-delete:hover { color: #ff5c5c; }
+.history-item:hover .hist-delete { opacity: 1; }
+
+.history-item .hist-delete:hover { color: #ff5c5c; background: #ff5c5c11; }
 
 /* ── Sidebar Toggle ── */
 .sidebar-toggle {
@@ -158,10 +176,10 @@ body {
 
 /* ── Calculator ── */
 .calculator {
-    background: #111118;
+    background: #0d0d14;
     border-radius: 16px;
     padding: 18px;
-    border: 1px solid #2a2a3e;
+    border: 1px solid #1e1e2e;
     width: 380px;
     transition: border-radius 0.35s cubic-bezier(.4,0,.2,1);
 }
